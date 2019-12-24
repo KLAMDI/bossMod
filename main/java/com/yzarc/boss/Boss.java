@@ -8,7 +8,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 @Mod(modid = Boss.MODID, version = Boss.VERSION, dependencies = "required-after:(props)")
 public class Boss
 {
-    public static final String MODID = "funcocraft";
+    public static final String MODID = "boss";
     public static final String VERSION = "0.1";
     
     @EventHandler
