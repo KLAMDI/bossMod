@@ -8,6 +8,8 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = BossMain.MODID, version = BossMain.VERSION)
 
@@ -20,7 +22,7 @@ public class BossMain
     public static CommonProxy proxy;
     
     @EventHandler
-    public void preinit(FMLInitializationEvent event)
+    public void preinit(FMLPreInitializationEvent event)
     {
     	proxy.preInit(event);
     }
@@ -28,7 +30,7 @@ public class BossMain
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	proxy.Init(event);
+    	proxy.init(event);
     }
     
     @EventHandler
