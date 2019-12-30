@@ -18,7 +18,7 @@ public class BossMain
     public static final String MODID = "boss";
     public static final String VERSION = "0.1";
     
-    @SidedProxy(clientSide="com.bedrockminer.tutorial.ClientProxy", serverSide="com.bedrockminer.tutorial.ServerProxy")
+    @SidedProxy(clientSide="com.yzarc.boss.ClientProxy", serverSide="com.yzarc.boss.ServerProxy")
     public static CommonProxy proxy;
     
     @EventHandler
