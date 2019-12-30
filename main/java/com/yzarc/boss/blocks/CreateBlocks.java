@@ -8,16 +8,16 @@ import com.yzarc.boss.BossMain;
 
 public class CreateBlocks extends Block
 {
-	protected CreateBlocks(String unlocalizedName, Material material, float hardness, float lightlevel)
+	protected CreateBlocks(String unlocalizedName, Material material, CreativeTabs creativetab, float hardness, float resistance, float lightlevel, String harvesttool, int harvestlevel, SoundType stepsound)
 	{
 		super(material);
         this.setBlockName(unlocalizedName);
         this.setBlockTextureName(BossMain.MODID + ":" + unlocalizedName);
-        this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setCreativeTab(creativetab);
         this.setHardness(hardness);
-        this.setResistance(6.0F);
+        this.setResistance(resistance);
         this.setLightLevel(lightlevel);
-        this.setHarvestLevel("pickaxe", 3);
-        this.setStepSound(soundTypeMetal);
+        this.setHarvestLevel(harvesttool, harvestlevel);
+        this.setStepSound(stepsound);
 	}
 }
