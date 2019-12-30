@@ -10,7 +10,7 @@ public class BossBlocks
     public static Block test;
     public static final void init() 
     {
-    	GameRegistry.registerBlock(test = new CreateBlocks("test", Material.cake, CreativeTabs.tabBlock , 2.0F, 6.0F, 1.0F, "pickaxe", 3, Block.soundTypeGravel), "test_block");
+    	GameRegistry.registerBlock(test = new CreateBlocks("test", Material.cake, null , 2.0F, 6.0F, 1.0F, "pickaxe", 3, Block.soundTypeGravel), "test_block");
     }
     
 }
