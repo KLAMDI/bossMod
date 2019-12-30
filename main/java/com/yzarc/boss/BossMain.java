@@ -6,6 +6,7 @@ import com.yzarc.boss.blocks.BossBlocks;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -17,6 +18,9 @@ public class BossMain
 {
     public static final String MODID = "boss";
     public static final String VERSION = "0.1";
+    
+    @Instance(MODID)
+    public static BossMain modInstance;
     
     @SidedProxy(clientSide="com.yzarc.boss.ClientProxy", serverSide="com.yzarc.boss.ServerProxy")
     public static CommonProxy proxy;
