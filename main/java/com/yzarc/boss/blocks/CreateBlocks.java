@@ -8,7 +8,7 @@ import com.yzarc.boss.BossMain;
 
 public class CreateBlocks extends Block
 {
-	protected CreateBlocks(String unlocalizedName, Material material, float hardness, int lightlevel)
+	protected CreateBlocks(String unlocalizedName, Material material, float hardness, float lightlevel)
 	{
 		super(material);
         this.setBlockName(unlocalizedName);
@@ -19,6 +19,5 @@ public class CreateBlocks extends Block
         this.setLightLevel(lightlevel);
         this.setHarvestLevel("pickaxe", 3);
         this.setStepSound(soundTypeMetal);
-        this.setBlockTextureName("test.png");
 	}
 }
