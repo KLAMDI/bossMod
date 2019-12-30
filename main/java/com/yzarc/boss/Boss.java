@@ -5,7 +5,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 
-@Mod(modid = Boss.MODID, version = Boss.VERSION, dependencies = "required-after:(props)")
+@Mod(modid = Boss.MODID, version = Boss.VERSION)
 public class Boss
 {
     public static final String MODID = "boss";
