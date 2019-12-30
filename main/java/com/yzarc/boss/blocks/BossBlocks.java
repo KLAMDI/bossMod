@@ -9,7 +9,7 @@ public class BossBlocks
     public static Block test;
     public static final void init() 
     {
-    	GameRegistry.registerBlock(test = new CreateBlocks("Test", Material.cake, 10.0F, 100), "Testo");
+    	GameRegistry.registerBlock(test = new CreateBlocks("Test", Material.cake, 10.0F, 1.0F), "Testo");
     }
     
 }
