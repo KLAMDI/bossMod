@@ -11,24 +11,14 @@ import net.minecraft.util.MathHelper;
 @SideOnly(Side.CLIENT)
 public class ModelBlob extends ModelBase {
 	public ModelRenderer core;
-	public ModelRenderer coreLDown1Center;
-	public ModelRenderer coreLDown2Center;
-	public ModelRenderer coreLDown3Center;
-	public ModelRenderer coreLDown4Center;
-	public ModelRenderer coreLUp1Center;
-	public ModelRenderer coreLUp2Center;
-	public ModelRenderer coreLUp3Center;
-	public ModelRenderer coreLUp4Center;
-	public ModelRenderer coreRDown1Center;
-	public ModelRenderer coreRDown2Center;
-	public ModelRenderer coreRDown3Center;
-	public ModelRenderer coreRDown4Center;
-	public ModelRenderer coreRUp1Center;
-	public ModelRenderer coreRUp2Center;
-	public ModelRenderer coreRUp3Center;
-	public ModelRenderer coreRUp4Center;
 	
-	public ModelRenderer[] coreLDown = new ModelRenderer[8];
+	//Goes from bottom to top
+	public ModelRenderer[] coreL = new ModelRenderer[8];
+	public int coreLlengths[] = {9,10,11,12,12,11,10,9};
+	public float coreLspeeds[] = {0.3F, 0.23F, 0.12F, 0.14F, 0.16F, 0.18F, 0.10F, 0.13F};
+	public ModelRenderer[] coreR = new ModelRenderer[8];
+	public int coreRlengths[] = {9,11,13,15,16,13,11,9};
+	public float coreRspeeds[] = {0.12F, 0.23F, 0.32F, 0.24F, 0.17F, 0.13F, 0.14F, 0.10F};
 	
     public ModelBlob()
     {
@@ -41,32 +31,19 @@ public class ModelBlob extends ModelBase {
         this.core = new ModelRenderer(this, 0, 0);
         this.core.addBox(0.0F, 19.0F, 0.0F, 8, 1, 8, scale);
         this.core.setRotationPoint(0.0F, (float)b0, 0.0F);
-        this.coreLDown1Center = new ModelRenderer(this, 0, 0);
-        this.coreLDown1Center.addBox(3.0F, 19.0F, 0.0F, 1, 1, 12, scale);
-        this.coreLDown1Center.setRotationPoint(0.0F, (float)b0, 0.0F);
-        this.coreLDown2Center = new ModelRenderer(this, 0, 0);
-        this.coreLDown2Center.addBox(2.0F, 19.0F, 0.0F, 1, 1, 11, scale);
-        this.coreLDown2Center.setRotationPoint(0.0F, (float)b0, 0.0F);
-        this.coreLDown3Center = new ModelRenderer(this, 0, 0);
-        this.coreLDown3Center.addBox(1.0F, 19.0F, 0.0F, 1, 1, 10, scale);
-        this.coreLDown3Center.setRotationPoint(0.0F, (float)b0, 0.0F);
-        this.coreLDown4Center = new ModelRenderer(this, 0, 0);
-        this.coreLDown4Center.addBox(0.0F, 19.0F, 0.0F, 1, 1, 9, scale);
-        this.coreLDown4Center.setRotationPoint(0.0F, (float)b0, 0.0F);
         
+        for (int i = 0; i < coreL.length; i++) {
+        	this.coreL[i] = new ModelRenderer(this, 0, 0);
+        	this.coreL[i].addBox(0.0F + (float)i, 19.0F, 0.0F, 1, 1, coreLlengths[i], scale);
+        	this.coreL[i].setRotationPoint(0.0F, (float)b0, 0.0F);
+        }
         
-        this.coreRDown1Center = new ModelRenderer(this, 0, 0);
-        this.coreRDown1Center.addBox(3.0F, 19.0F, -7.0F, 1, 1, 15, scale);
-        this.coreRDown1Center.setRotationPoint(0.0F, (float)b0, 0.0F);
-        this.coreRDown2Center = new ModelRenderer(this, 0, 0);
-        this.coreRDown2Center.addBox(2.0F, 19.0F, -5.0F, 1, 1, 13, scale);
-        this.coreRDown2Center.setRotationPoint(0.0F, (float)b0, 0.0F);
-        this.coreRDown3Center = new ModelRenderer(this, 0, 0);
-        this.coreRDown3Center.addBox(1.0F, 19.0F, -3.0F, 1, 1, 11, scale);
-        this.coreRDown3Center.setRotationPoint(0.0F, (float)b0, 0.0F);
-        this.coreRDown4Center = new ModelRenderer(this, 0, 0);
-        this.coreRDown4Center.addBox(0.0F, 19.0F, -1.0F, 1, 1, 9, scale);
-        this.coreRDown4Center.setRotationPoint(0.0F, (float)b0, 0.0F);
+        for (int i = 0; i < coreR.length; i++) {
+        	this.coreR[i] = new ModelRenderer(this, 0, 0);
+        	this.coreR[i].addBox(0.0F + (float)i, 19.0F, (float)(8 - coreRlengths[i]), 1, 1, coreRlengths[i], scale);
+        	this.coreR[i].setRotationPoint(0.0F, (float)b0, 0.0F);
+        }
+        
     }
     
     /**
@@ -76,14 +53,15 @@ public class ModelBlob extends ModelBase {
     {
         this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, par7, p_78088_1_);
         this.core.render(par7);
-        this.coreLDown1Center.render(par7);
-        this.coreLDown2Center.render(par7);
-        this.coreLDown3Center.render(par7);
-        this.coreLDown4Center.render(par7);
-        this.coreRDown1Center.render(par7);
-        this.coreRDown2Center.render(par7);
-        this.coreRDown3Center.render(par7);
-        this.coreRDown4Center.render(par7);
+        
+        for (int i = 0; i < coreL.length; i++) {
+        	this.coreL[i].render(par7);
+        }
+        
+        for (int i = 0; i < coreR.length; i++) {
+        	this.coreR[i].render(par7);
+        }
+
     }
     
     /**
@@ -93,14 +71,14 @@ public class ModelBlob extends ModelBase {
      */
     public void setRotationAngles(float speed, float p_78087_2_, float time, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_)
     {
-    	  this.coreLDown1Center.offsetZ = MathHelper.cos(0.1F*time + 0.1F*speed)*0.05F;
-    	  this.coreLDown2Center.offsetZ = MathHelper.cos(0.12F*time + 0.12F*speed)*0.05F;
-    	  this.coreLDown3Center.offsetZ = MathHelper.cos(0.2F*time + 0.15F*speed)*0.05F;
-    	  this.coreLDown4Center.offsetZ = MathHelper.cos(0.3F*time + 0.2F*speed)*0.05F;
-    	  this.coreRDown1Center.offsetZ = MathHelper.cos(0.3F*time + 0.3F*speed + .2F)*0.05F;
-    	  this.coreRDown2Center.offsetZ = MathHelper.cos(0.24F*time + 0.23F*speed + .2F)*0.05F;
-    	  this.coreRDown3Center.offsetZ = MathHelper.cos(0.12F*time + 0.2F*speed + .2F)*0.05F;
-    	  this.coreRDown4Center.offsetZ = MathHelper.cos(0.2F*time + 0.03F*speed + .2F)*0.05F;
+        for (int i = 0; i < coreL.length; i++) {
+        	this.coreL[i].offsetZ = MathHelper.cos(coreLspeeds[i]*time + coreLspeeds[i]*speed)*0.05F;
+        }
+        
+        for (int i = 0; i < coreR.length; i++) {
+        	this.coreR[i].offsetZ  = MathHelper.cos(coreRspeeds[i]*time + coreRspeeds[i]*speed + .2F)*0.05F;
+        }
+
     }
     
 
