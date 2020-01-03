@@ -18,7 +18,6 @@ import com.yzarc.boss.entity.EntityBlob;;
 public class RenderBlob extends RenderLiving {
 
     private static final ResourceLocation blobTextures = new ResourceLocation(BossMain.MODID + ":textures/blocks/stest.png");
-    private ModelBase scaleAmount;
 
     public RenderBlob(ModelBase p_i1253_1_, float p_i1253_2_)
     {
