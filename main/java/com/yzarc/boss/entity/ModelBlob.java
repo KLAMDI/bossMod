@@ -34,13 +34,13 @@ public class ModelBlob extends ModelBase {
         
         for (int i = 0; i < coreL.length; i++) {
         	this.coreL[i] = new ModelRenderer(this, 0, 0);
-        	this.coreL[i].addBox(0.0F + (float)i, 19.0F, 0.0F, 1, 1, coreLlengths[i], scale);
+        	this.coreL[i].addBox(0.0F, 19.0F, 0.0F + (float)i, coreLlengths[i], 1, 1, scale);
         	this.coreL[i].setRotationPoint(0.0F, (float)b0, 0.0F);
         }
         
         for (int i = 0; i < coreR.length; i++) {
         	this.coreR[i] = new ModelRenderer(this, 0, 0);
-        	this.coreR[i].addBox(0.0F + (float)i, 19.0F, (float)(8 - coreRlengths[i]), 1, 1, coreRlengths[i], scale);
+        	this.coreR[i].addBox((float)(8 - coreRlengths[i]), 19.0F, 0.0F + (float)i, coreRlengths[i], 1, 1, scale);
         	this.coreR[i].setRotationPoint(0.0F, (float)b0, 0.0F);
         }
         
