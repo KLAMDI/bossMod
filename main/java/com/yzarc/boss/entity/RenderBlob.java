@@ -8,6 +8,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.util.ResourceLocation;
 
 import com.yzarc.boss.BossMain;
@@ -16,54 +17,13 @@ import com.yzarc.boss.entity.EntityBlob;;
 @SideOnly(Side.CLIENT)
 public class RenderBlob extends RenderLiving {
 
-    private static final ResourceLocation blobTextures = new ResourceLocation(BossMain.MODID + ":textures/blocks/test.png");
+    private static final ResourceLocation blobTextures = new ResourceLocation(BossMain.MODID + ":textures/blocks/stest.png");
     private ModelBase scaleAmount;
 
-    public RenderBlob(ModelBase p_i1267_1_, float p_i1267_3_)
+    public RenderBlob(ModelBase p_i1253_1_, float p_i1253_2_)
     {
-        super(p_i1267_1_, p_i1267_3_);
+        super(p_i1253_1_, p_i1253_2_);
     }
-
-    /**
-     * Queries whether should render the specified pass or not.
-     */
-    protected int shouldRenderPass(EntityBlob p_77032_1_, int p_77032_2_, float p_77032_3_)
-    {
-        if (p_77032_1_.isInvisible())
-        {
-            return 0;
-        }
-        else if (p_77032_2_ == 0)
-        {
-            this.setRenderPassModel(this.scaleAmount);
-            GL11.glEnable(GL11.GL_NORMALIZE);
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            return 1;
-        }
-        else
-        {
-            if (p_77032_2_ == 1)
-            {
-                GL11.glDisable(GL11.GL_BLEND);
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            }
-
-            return -1;
-        }
-    }
-
-//    /**
-//     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-//     * entityLiving, partialTickTime
-//     */
-//    protected void preRenderCallback(EntityBlob p_77041_1_, float p_77041_2_)
-//    {
-//        float f1 = (float)p_77041_1_.getBlobSize();
-//        float f2 = (p_77041_1_.prevSquishFactor + (p_77041_1_.squishFactor - p_77041_1_.prevSquishFactor) * p_77041_2_) / (f1 * 0.5F + 1.0F);
-//        float f3 = 1.0F / (f2 + 1.0F);
-//        GL11.glScalef(f3 * f1, 1.0F / f3 * f1, f3 * f1);
-//    }
 
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
@@ -71,23 +31,6 @@ public class RenderBlob extends RenderLiving {
     protected ResourceLocation getEntityTexture(EntityBlob p_110775_1_)
     {
         return blobTextures;
-    }
-//
-//    /**
-//     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
-//     * entityLiving, partialTickTime
-//     */
-//    protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_)
-//    {
-//        this.preRenderCallback((EntityBlob)p_77041_1_, p_77041_2_);
-//    }
-
-    /**
-     * Queries whether should render the specified pass or not.
-     */
-    protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_)
-    {
-        return this.shouldRenderPass((EntityBlob)p_77032_1_, p_77032_2_, p_77032_3_);
     }
 
     /**
