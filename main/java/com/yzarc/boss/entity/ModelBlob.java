@@ -72,11 +72,11 @@ public class ModelBlob extends ModelBase {
     public void setRotationAngles(float speed, float p_78087_2_, float time, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_)
     {
         for (int i = 0; i < coreL.length; i++) {
-        	this.coreL[i].offsetZ = MathHelper.cos(coreLspeeds[i]*time + coreLspeeds[i]*speed)*0.05F;
+        	this.coreL[i].offsetX = MathHelper.cos(coreLspeeds[i]*time + coreLspeeds[i]*speed)*0.05F;
         }
         
         for (int i = 0; i < coreR.length; i++) {
-        	this.coreR[i].offsetZ  = MathHelper.cos(coreRspeeds[i]*time + coreRspeeds[i]*speed + .2F)*0.05F;
+        	this.coreR[i].offsetX  = MathHelper.cos(coreRspeeds[i]*time + coreRspeeds[i]*speed + .2F)*0.05F;
         }
 
     }
