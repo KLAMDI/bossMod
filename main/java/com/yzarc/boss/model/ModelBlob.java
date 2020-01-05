@@ -9,10 +9,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 
 @SideOnly(Side.CLIENT)
-public class ModelBlob extends ModelBase {
+public class ModelBlob extends ModelBase 
+{
 	
 	private boolean isBig;
 	
+	//bodyparts
 	private ModelRenderer core;
 	private ModelRenderer coreBack;
 	private ModelRenderer coreFront;
@@ -102,37 +104,40 @@ public class ModelBlob extends ModelBase {
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity p_78088_1_, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float par7)
+    public void render(Entity entity, float speed, float maxSwing, float time, float p_78088_5_, float p_78088_6_, float par7)
     {
-        this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, par7, p_78088_1_);
+    	this.setRotationAngles(speed, maxSwing, time, p_78088_5_, p_78088_6_, par7, entity);
         this.core.render(par7);
-//        this.coreBack.render(par7);
-//        this.coreFront.render(par7);
         
-//        for (int i = 0; i < coreL.length; i++) {
-//        	this.coreL[i].render(par7);
-//        }
-//        
-//        for (int i = 0; i < coreR.length; i++) {
-//        	this.coreR[i].render(par7);
-//        }
-//
-//        for (int i = 0; i < backL.length; i++) {
-//        	this.backL[i].render(par7);
-//        }
-//        
-//        for (int i = 0; i < backR.length; i++) {
-//        	this.backR[i].render(par7);
-//        }
-//        
-//        for (int i = 0; i < frontL.length; i++) {
-//        	this.frontL[i].render(par7);
-//        }
-//        
-//        for (int i = 0; i < frontR.length; i++) {
-//        	this.frontR[i].render(par7);
-//        }
-        
+        if (isBig)
+        {
+        	this.coreBack.render(par7);
+        	this.coreFront.render(par7);
+            
+            for (int i = 0; i < coreL.length; i++) {
+            	this.coreL[i].render(par7);
+            }
+            
+            for (int i = 0; i < coreR.length; i++) {
+            	this.coreR[i].render(par7);
+            }
+
+            for (int i = 0; i < backL.length; i++) {
+            	this.backL[i].render(par7);
+            }
+            
+            for (int i = 0; i < backR.length; i++) {
+            	this.backR[i].render(par7);
+            }
+           
+            for (int i = 0; i < frontL.length; i++) {
+            	this.frontL[i].render(par7);
+            }
+           
+            for (int i = 0; i < frontR.length; i++) {
+            	this.frontR[i].render(par7);
+            }
+        }              
     }
     
     /**
@@ -140,7 +145,7 @@ public class ModelBlob extends ModelBase {
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float speed, float p_78087_2_, float time, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity p_78087_7_)
+    public void setRotationAngles(float speed, float maxSwing, float time, float p_78087_4_, float p_78087_5_, float p_78087_6_, Entity entity)
     {
         for (int i = 0; i < coreL.length; i++) {
         	this.coreL[i].offsetX = MathHelper.cos(coreLspeeds[i]*time + coreLspeeds[i]*speed)*0.05F;
@@ -167,6 +172,16 @@ public class ModelBlob extends ModelBase {
         }
         
     }
+
+	public boolean isBig() {
+		return isBig;
+	}
+
+	public void setBig(boolean isBig) {
+		this.isBig = isBig;
+	}
+    
+    
     
 
 }
