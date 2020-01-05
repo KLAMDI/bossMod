@@ -2,6 +2,7 @@ package com.yzarc.boss.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -12,6 +13,7 @@ public class EntityBlob extends EntityMob
 {
 	private float sizeY = 1.0F;
 	private float sizeX = 1.0F;
+	private double aggroDistance = 4.0D;
 	
 	private boolean isBig = false;
 	
@@ -20,8 +22,7 @@ public class EntityBlob extends EntityMob
 		super(worldIn);
 		this.setSize(sizeY,sizeX);
 		//this.tasks.addTask(0, new EntityAIWander(this, 0.1D));
-		//this.tasks.addTask(1, new EntityAIChangeStance(this, EntityPlayer.class, 4));
-		//this.tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		this.tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		//this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 		
 		// TODO Auto-generated constructor stub
@@ -43,8 +44,7 @@ public class EntityBlob extends EntityMob
 
 	@Override
 	protected void updateEntityActionState() {
-		// TODO Auto-generated method stub
-		//super.updateEntityActionState();
+		super.updateEntityActionState();
 	}
 
 	protected Item getDropItem()
@@ -76,15 +76,21 @@ public class EntityBlob extends EntityMob
     
     public void changeStance()
     {
-    	if (this.worldObj.getClosestPlayerToEntity(this, 8.0D) != null)
+    	if (this.worldObj.getClosestPlayerToEntity(this, aggroDistance) != null)
     	{
     		isBig = true;
-    		this.setSizeXY(2.0F, 2.0F);
     	}
     	else
     	{
     		isBig = false;
-    		this.setSizeXY(1.0F, 1.0F);
     	}
     }
+
+	public boolean isBig() {
+		return isBig;
+	}
+
+	public void setBig(boolean isBig) {
+		this.isBig = isBig;
+	}
 }
