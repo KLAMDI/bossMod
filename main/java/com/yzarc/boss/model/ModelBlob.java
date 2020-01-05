@@ -44,14 +44,14 @@ public class ModelBlob extends ModelBase {
 	
     public ModelBlob()
     {
-        this(1.0F);
+        this(0.0F);
     }
 
     public ModelBlob(float scale)
     {
         byte b0 = 4;
         this.core = new ModelRenderer(this, 0, 0);
-        this.core.addBox(0.0F, 19.0F, 0.0F, 16, 0, 16, scale);
+        this.core.addBox(0.0F, 19.0F, 0.0F, 16, 1, 16, scale);
         this.core.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
         this.coreBack = new ModelRenderer(this, 0, 2);
