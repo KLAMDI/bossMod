@@ -53,49 +53,49 @@ public class ModelBlob extends ModelBase
     {
         byte b0 = 4;
         this.core = new ModelRenderer(this, 0, 0);
-        this.core.addBox(0.0F, 19.0F, 0.0F, 16, 1, 16, scale);
+        this.core.addBox(0.0F, 18.9F, 0.0F, 16, 1, 16, scale);
         this.core.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
-        this.coreBack = new ModelRenderer(this, 0, 2);
-        this.coreBack.addBox(4.0F, 19.0F, 16.0F, 8, 1, 4, scale);
+        this.coreBack = new ModelRenderer(this, 0, 17);
+        this.coreBack.addBox(4.0F, 18.9F, 16.0F, 8, 1, 4, scale);
         this.coreBack.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
-        this.coreFront = new ModelRenderer(this, 0, 4);
-        this.coreFront.addBox(4.0F, 19.0F, -4.0F, 8, 1, 4, scale);
+        this.coreFront = new ModelRenderer(this, 24, 17);
+        this.coreFront.addBox(4.0F, 18.9F, -4.0F, 8, 1, 4, scale);
         this.coreFront.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
         for (int i = 0; i < backL.length; i++) {
-        	this.backL[i] = new ModelRenderer(this, 0, 6 + 2*i);
+        	this.backL[i] = new ModelRenderer(this, 0, 22);
         	this.backL[i].addBox(12.0F, 19.0F, 16.0F + (float)i, backLlengths[i], 1, 1, scale);
         	this.backL[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
 		}
         
         for (int i = 0; i < backR.length; i++) {
-        	this.backR[i] = new ModelRenderer(this, 18, 6 + 2*i);
+        	this.backR[i] = new ModelRenderer(this, 0, 22);
         	this.backR[i].addBox((float)(4 - backRlengths[i]), 19.0F, 16.0F + (float)i, backRlengths[i], 1, 1, scale);
         	this.backR[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
 		}
         
         for (int i = 0; i < coreL.length; i++) {
-        	this.coreL[i] = new ModelRenderer(this, 0, 0);
+        	this.coreL[i] = new ModelRenderer(this, 0, 22);
         	this.coreL[i].addBox(12.0F, 19.0F, 0.0F + (float)i, coreLlengths[i], 1, 1, scale);
         	this.coreL[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
         
         for (int i = 0; i < coreR.length; i++) {
-        	this.coreR[i] = new ModelRenderer(this, 0, 0);
+        	this.coreR[i] = new ModelRenderer(this, 0, 22);
         	this.coreR[i].addBox((float)(4 - coreRlengths[i]), 19.0F, 0.0F + (float)i, coreRlengths[i], 1, 1, scale);
         	this.coreR[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
        
         for (int i = 0; i < frontL.length; i++) {
-        	this.frontL[i] = new ModelRenderer(this, 0, 0);
+        	this.frontL[i] = new ModelRenderer(this, 0, 22);
         	this.frontL[i].addBox(12.0F, 19.0F, -4.0F + (float)i, frontLlengths[i], 1, 1, scale);
         	this.frontL[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
         
         for (int i = 0; i < frontR.length; i++) {
-        	this.frontR[i] = new ModelRenderer(this, 0, 0);
+        	this.frontR[i] = new ModelRenderer(this, 0, 22);
         	this.frontR[i].addBox((float)(4 - frontRlengths[i]), 19.0F, -4.0F + (float)i, frontRlengths[i], 1, 1, scale);
         	this.frontR[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
@@ -108,35 +108,36 @@ public class ModelBlob extends ModelBase
     {
     	this.setRotationAngles(speed, maxSwing, time, p_78088_5_, p_78088_6_, par7, entity);
         this.core.render(par7);
+    	this.coreBack.render(par7);
+    	this.coreFront.render(par7);
+        
+        for (int i = 0; i < coreL.length; i++) {
+        	this.coreL[i].render(par7);
+        }
+        
+        for (int i = 0; i < coreR.length; i++) {
+        	this.coreR[i].render(par7);
+        }
+
+        for (int i = 0; i < backL.length; i++) {
+        	this.backL[i].render(par7);
+        }
+        
+        for (int i = 0; i < backR.length; i++) {
+        	this.backR[i].render(par7);
+        }
+       
+        for (int i = 0; i < frontL.length; i++) {
+        	this.frontL[i].render(par7);
+        }
+       
+        for (int i = 0; i < frontR.length; i++) {
+        	this.frontR[i].render(par7);
+        }
         
         if (isBig)
         {
-        	this.coreBack.render(par7);
-        	this.coreFront.render(par7);
-            
-            for (int i = 0; i < coreL.length; i++) {
-            	this.coreL[i].render(par7);
-            }
-            
-            for (int i = 0; i < coreR.length; i++) {
-            	this.coreR[i].render(par7);
-            }
-
-            for (int i = 0; i < backL.length; i++) {
-            	this.backL[i].render(par7);
-            }
-            
-            for (int i = 0; i < backR.length; i++) {
-            	this.backR[i].render(par7);
-            }
-           
-            for (int i = 0; i < frontL.length; i++) {
-            	this.frontL[i].render(par7);
-            }
-           
-            for (int i = 0; i < frontR.length; i++) {
-            	this.frontR[i].render(par7);
-            }
+        	
         }              
     }
     
