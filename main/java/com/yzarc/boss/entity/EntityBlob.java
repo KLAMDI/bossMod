@@ -7,12 +7,13 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityBlob extends EntityMob
 {
-	private float sizeY = 1.0F;
-	private float sizeX = 1.0F;
+	private float width = 1.0F;
+	private float height = 1.0F;
 	private double aggroDistance = 4.0D;
 	
 	private boolean isBig = false;
@@ -20,7 +21,7 @@ public class EntityBlob extends EntityMob
 	public EntityBlob(World worldIn) 
 	{
 		super(worldIn);
-		this.setSize(sizeY,sizeX);
+		this.setSize(width,height);
 		//this.tasks.addTask(0, new EntityAIWander(this, 0.1D));
 		this.tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		//this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
@@ -56,23 +57,6 @@ public class EntityBlob extends EntityMob
 	{
 		return super.getCanSpawnHere();
 	}
-	
-	public void setSizeY(float sizeY)
-	{
-		this.sizeY = sizeY;
-	}
-	
-	public void setSizeX(float sizeX)
-	{
-		this.sizeX = sizeX;
-	}
-	
-    public void setSizeXY(float sizeY, float sizeX)
-    {
-    	this.setSizeX(sizeX);
-    	this.setSizeY(sizeY);
-    	this.setSize(sizeX, sizeY);
-    }
     
     public void changeStance()
     {
