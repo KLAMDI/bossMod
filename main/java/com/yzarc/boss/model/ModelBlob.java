@@ -57,11 +57,11 @@ public class ModelBlob extends ModelBase
         this.core.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
         this.coreBack = new ModelRenderer(this, 0, 17);
-        this.coreBack.addBox(4.0F, 18.9F, 16.0F, 8, 1, 4, scale);
+        this.coreBack.addBox(3.0F, 18.9F, 16.0F, 10, 1, 4, scale);
         this.coreBack.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
-        this.coreFront = new ModelRenderer(this, 24, 17);
-        this.coreFront.addBox(4.0F, 18.9F, -4.0F, 8, 1, 4, scale);
+        this.coreFront = new ModelRenderer(this, 28, 17);
+        this.coreFront.addBox(3.0F, 18.9F, -4.0F, 10, 1, 4, scale);
         this.coreFront.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
         for (int i = 0; i < backL.length; i++) {
