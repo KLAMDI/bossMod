@@ -18,8 +18,13 @@ public class ModelBlob extends ModelBase
 	private ModelRenderer core;
 	private ModelRenderer coreBack;
 	private ModelRenderer coreFront;
+	private ModelRenderer coreLeft;
+	private ModelRenderer coreRight;
 	
-	//Goes from top to bottom
+	//From top to bottom, second layer
+	
+	
+	//Goes from top to bottom, core layer
 	private ModelRenderer[] frontL = new ModelRenderer[4];
 	private int frontLlengths[] = {4, 6, 7, 8};
 	private float frontLspeeds[] = {0.17F, 0.20F, 0.22F, 0.18F};
@@ -53,49 +58,57 @@ public class ModelBlob extends ModelBase
     {
         byte b0 = 4;
         this.core = new ModelRenderer(this, 0, 0);
-        this.core.addBox(0.0F, 18.9F, 0.0F, 16, 1, 16, scale);
+        this.core.addBox(0.0F, 17.0F, 0.0F, 16, 3, 16, scale);
         this.core.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
-        this.coreBack = new ModelRenderer(this, 0, 17);
-        this.coreBack.addBox(3.0F, 18.9F, 16.0F, 10, 1, 4, scale);
+        this.coreBack = new ModelRenderer(this, 0, 19);
+        this.coreBack.addBox(3.0F, 18.0F, 16.0F, 10, 2, 5, scale);
         this.coreBack.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
-        this.coreFront = new ModelRenderer(this, 28, 17);
-        this.coreFront.addBox(3.0F, 18.9F, -4.0F, 10, 1, 4, scale);
+        this.coreFront = new ModelRenderer(this, 28, 19);
+        this.coreFront.addBox(3.0F, 18.0F, -5.0F, 10, 2, 5, scale);
         this.coreFront.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
+        this.coreLeft = new ModelRenderer(this, 10, 0);
+        this.coreLeft.addBox(16.0F, 18.0F, 3.0F, 5, 2, 10, scale);
+        this.coreLeft.setRotationPoint(-8.0F, (float)b0, -8.0F);
+        
+        this.coreRight = new ModelRenderer(this, 10, 0);
+        this.coreRight.addBox(-5.0F, 18.0F, 3.0F, 5, 2, 10, scale);
+        this.coreRight.setRotationPoint(-8.0F, (float)b0, -8.0F);
+        
         for (int i = 0; i < backL.length; i++) {
-        	this.backL[i] = new ModelRenderer(this, 0, 22);
+        	this.backL[i] = new ModelRenderer(this, 0, 26);
         	this.backL[i].addBox(12.0F, 19.0F, 16.0F + (float)i, backLlengths[i], 1, 1, scale);
         	this.backL[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
 		}
         
         for (int i = 0; i < backR.length; i++) {
-        	this.backR[i] = new ModelRenderer(this, 0, 22);
+        	this.backR[i] = new ModelRenderer(this, 0, 26);
         	this.backR[i].addBox((float)(4 - backRlengths[i]), 19.0F, 16.0F + (float)i, backRlengths[i], 1, 1, scale);
         	this.backR[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
 		}
         
         for (int i = 0; i < coreL.length; i++) {
-        	this.coreL[i] = new ModelRenderer(this, 0, 22);
+        	this.coreL[i] = new ModelRenderer(this, 0, 26);
         	this.coreL[i].addBox(12.0F, 19.0F, 0.0F + (float)i, coreLlengths[i], 1, 1, scale);
         	this.coreL[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
         
         for (int i = 0; i < coreR.length; i++) {
-        	this.coreR[i] = new ModelRenderer(this, 0, 22);
+        	this.coreR[i] = new ModelRenderer(this, 0, 26);
         	this.coreR[i].addBox((float)(4 - coreRlengths[i]), 19.0F, 0.0F + (float)i, coreRlengths[i], 1, 1, scale);
         	this.coreR[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
        
         for (int i = 0; i < frontL.length; i++) {
-        	this.frontL[i] = new ModelRenderer(this, 0, 22);
+        	this.frontL[i] = new ModelRenderer(this, 0, 26);
         	this.frontL[i].addBox(12.0F, 19.0F, -4.0F + (float)i, frontLlengths[i], 1, 1, scale);
         	this.frontL[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
         
         for (int i = 0; i < frontR.length; i++) {
-        	this.frontR[i] = new ModelRenderer(this, 0, 22);
+        	this.frontR[i] = new ModelRenderer(this, 0, 26);
         	this.frontR[i].addBox((float)(4 - frontRlengths[i]), 19.0F, -4.0F + (float)i, frontRlengths[i], 1, 1, scale);
         	this.frontR[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
@@ -110,7 +123,9 @@ public class ModelBlob extends ModelBase
         this.core.render(par7);
     	this.coreBack.render(par7);
     	this.coreFront.render(par7);
-        
+    	this.coreLeft.render(par7);
+    	this.coreRight.render(par7);
+    	
         for (int i = 0; i < coreL.length; i++) {
         	this.coreL[i].render(par7);
         }
