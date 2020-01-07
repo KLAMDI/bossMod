@@ -69,15 +69,15 @@ public class ModelBlob extends ModelBase
         this.coreBack.addBox(3.0F, 18.0F, 16.0F, 10, 2, 5, scale);
         this.coreBack.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
-        this.coreFront = new ModelRenderer(this, 28, 19);
+        this.coreFront = new ModelRenderer(this, 30, 19);
         this.coreFront.addBox(3.0F, 18.0F, -5.0F, 10, 2, 5, scale);
         this.coreFront.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
-        this.coreLeft = new ModelRenderer(this, 10, 0);
+        this.coreLeft = new ModelRenderer(this, 0, 28);
         this.coreLeft.addBox(16.0F, 18.0F, 3.0F, 5, 2, 10, scale);
         this.coreLeft.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
-        this.coreRight = new ModelRenderer(this, 10, 0);
+        this.coreRight = new ModelRenderer(this, 0, 28);
         this.coreRight.addBox(-5.0F, 18.0F, 3.0F, 5, 2, 10, scale);
         this.coreRight.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
