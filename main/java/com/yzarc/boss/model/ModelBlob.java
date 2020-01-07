@@ -56,6 +56,10 @@ public class ModelBlob extends ModelBase
 
     public ModelBlob(float scale)
     {
+    	
+    	this.textureWidth = 64;
+    	this.textureHeight = 64;
+    	
         byte b0 = 4;
         this.core = new ModelRenderer(this, 0, 0);
         this.core.addBox(0.0F, 17.0F, 0.0F, 16, 3, 16, scale);
