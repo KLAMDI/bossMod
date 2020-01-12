@@ -124,34 +124,35 @@ public class EntityBlob extends EntityMob
 		dz = this.posZ - posZ;
 		
 		if (dx < 0)
-			dx -= 0.4;
+			dx -= 0.3;
 		else
-			dx += 0.4;
+			dx += 0.3;
 		
 		if (dy < 0)
-			dy -= 0.4;
+			dy -= 0.3;
 		else
-			dy += 0.4;
+			dy += 0.3;
 		
 		if (dz < 0)
-			dz -= 0.4;
+			dz -= 0.3;
 		else
-			dz += 0.4;
+			dz += 0.3;
 		
 		double 	newPosX = this.posX + dx,
 				newPosY = this.posY + dy,
 				newPosZ = this.posZ + dz;
 		
 		EntityArrow arrow = new EntityArrow(this.worldObj, newPosX, newPosY, newPosZ);
+		arrow.canBePickedUp = 1;
+		arrow.motionX = entity.motionX;
+		arrow.motionY = entity.motionY;
+		arrow.motionZ = entity.motionZ;
 		
 		if (!this.worldObj.isRemote)
         {
             this.worldObj.spawnEntityInWorld(arrow);
-            arrow.motionX = entity.motionX * 3;
-    		arrow.motionY = entity.motionY;
-    		arrow.motionZ = entity.motionZ;
         }
-		System.out.println(posX + " "+ posY + " " + posZ + "\n");
+		System.out.println(posX + " "+ posY + " " + posZ + "\t");
 		System.out.println(arrow.motionX + " " + arrow.motionY + " " + arrow.motionZ);
 	}
 }
