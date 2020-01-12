@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityBlob extends EntityMob
@@ -15,6 +16,7 @@ public class EntityBlob extends EntityMob
 	private float width = 1.0F;
 	private float height = 1.0F;
 	private double aggroDistance = 4.0D;
+	private char arrowCount;
 	
 	private boolean isBig = false;
 	
@@ -40,7 +42,21 @@ public class EntityBlob extends EntityMob
 	public void onLivingUpdate()
 	{
 		changeStance();
+		//if shot by entity; arrowCount++
+		
+		//if shot by 2 arrows and isBig chance to donut-stance
 		super.onLivingUpdate();
+	}
+	
+	public boolean attackEntityFrom(DamageSource source, float f1)
+	{
+		if (source.isProjectile())
+		{
+			this.arrowCount++;
+			if (arrowCount > 5)
+				System.out.println("" + this.arrowCount);
+		}
+		return super.attackEntityFrom(source, f1);
 	}
 
 	@Override
@@ -76,5 +92,10 @@ public class EntityBlob extends EntityMob
 
 	public void setBig(boolean isBig) {
 		this.isBig = isBig;
+	}
+	
+	public void DodgeArrows()
+	{
+		
 	}
 }
