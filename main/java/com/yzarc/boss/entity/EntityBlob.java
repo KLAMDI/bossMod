@@ -16,14 +16,18 @@ public class EntityBlob extends EntityMob
 	private float width = 1.0F;
 	private float height = 1.0F;
 	private double aggroDistance = 4.0D;
-	private char arrowCount;
+	private int arrowCount;
 	
-	private boolean isBig = false;
+	private boolean isBig;
+	private boolean donutStance;
 	
 	public EntityBlob(World worldIn) 
 	{
 		super(worldIn);
 		this.setSize(width,height);
+		this.arrowCount = 0;
+		this.isBig = false;
+		this.donutStance = false;
 		//this.tasks.addTask(0, new EntityAIWander(this, 0.1D));
 		this.tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		//this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
@@ -34,7 +38,7 @@ public class EntityBlob extends EntityMob
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 	}
@@ -42,19 +46,25 @@ public class EntityBlob extends EntityMob
 	public void onLivingUpdate()
 	{
 		changeStance();
-		//if shot by entity; arrowCount++
-		
-		//if shot by 2 arrows and isBig chance to donut-stance
+		if (donutStance)
+		{
+			DodgeArrows();
+		}
 		super.onLivingUpdate();
 	}
 	
 	public boolean attackEntityFrom(DamageSource source, float f1)
 	{
-		if (source.isProjectile())
+		if (!donutStance)
 		{
-			this.arrowCount++;
-			if (arrowCount > 5)
-				System.out.println("" + this.arrowCount);
+			if (source.isProjectile())
+			{
+				this.arrowCount++;
+				if (arrowCount >= 3)
+				{
+					donutStance = true;
+				}
+			}
 		}
 		return super.attackEntityFrom(source, f1);
 	}
