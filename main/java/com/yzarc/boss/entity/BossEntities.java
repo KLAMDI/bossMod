@@ -16,7 +16,7 @@ public class BossEntities
 	
 	public static final void init()
 	{
-		createEntity(EntityBlob.class, "Test Blob", 0x6fd699 , 0x326351);
+		createEntity(EntityBlob.class, "blob", 0x6fd699 , 0x326351);
 	}
 	
 	public static void createEntity(Class entityClass, String entityName, int solidColor, int spotColor)
