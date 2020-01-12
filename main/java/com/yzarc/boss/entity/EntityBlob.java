@@ -5,6 +5,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
@@ -13,8 +14,8 @@ import net.minecraft.world.World;
 
 public class EntityBlob extends EntityMob
 {
-	private float width = 1.0F;
-	private float height = 1.0F;
+	private float width = 2.0F;
+	private float height = 0.3F;
 	private double aggroDistance = 4.0D;
 	private int arrowCount;
 	
@@ -29,8 +30,7 @@ public class EntityBlob extends EntityMob
 		this.isBig = false;
 		this.donutStance = false;
 		//this.tasks.addTask(0, new EntityAIWander(this, 0.1D));
-		this.tasks.addTask(1, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		//this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -46,18 +46,15 @@ public class EntityBlob extends EntityMob
 	public void onLivingUpdate()
 	{
 		changeStance();
-		if (donutStance)
-		{
-			DodgeArrows();
-		}
-		super.onLivingUpdate();
+		//super.onLivingUpdate();
 	}
 	
 	public boolean attackEntityFrom(DamageSource source, float f1)
 	{
-		if (!donutStance)
+		Entity entity = source.getSourceOfDamage();
+		if (entity instanceof EntityArrow)
 		{
-			if (source.isProjectile())
+			if (!donutStance)
 			{
 				this.arrowCount++;
 				if (arrowCount >= 3)
@@ -65,6 +62,16 @@ public class EntityBlob extends EntityMob
 					donutStance = true;
 				}
 			}
+			else //if donutStance
+			{
+				entity.setDead();
+				SpawnArrow(entity);
+				return false;
+			}
+		}
+		else
+		{
+			
 		}
 		return super.attackEntityFrom(source, f1);
 	}
@@ -104,8 +111,47 @@ public class EntityBlob extends EntityMob
 		this.isBig = isBig;
 	}
 	
-	public void DodgeArrows()
+	//spawns a copy of the arrow taht went into it's body --NEEDS ROTATION CHECK--
+	public void SpawnArrow(Entity entity)
 	{
+		double 	posX = entity.posX, //3 
+				posY = entity.posY, 
+				posZ = entity.posZ;
+		double dx, dy, dz;
+		//blob pos = ~0 ~0 ~0
+		dx = this.posX - posX; //this.posX = 5
+		dy = this.posY - posY;
+		dz = this.posZ - posZ;
 		
+		if (dx < 0)
+			dx -= 0.4;
+		else
+			dx += 0.4;
+		
+		if (dy < 0)
+			dy -= 0.4;
+		else
+			dy += 0.4;
+		
+		if (dz < 0)
+			dz -= 0.4;
+		else
+			dz += 0.4;
+		
+		double 	newPosX = this.posX + dx,
+				newPosY = this.posY + dy,
+				newPosZ = this.posZ + dz;
+		
+		EntityArrow arrow = new EntityArrow(this.worldObj, newPosX, newPosY, newPosZ);
+		
+		if (!this.worldObj.isRemote)
+        {
+            this.worldObj.spawnEntityInWorld(arrow);
+            arrow.motionX = entity.motionX * 3;
+    		arrow.motionY = entity.motionY;
+    		arrow.motionZ = entity.motionZ;
+        }
+		System.out.println(posX + " "+ posY + " " + posZ + "\n");
+		System.out.println(arrow.motionX + " " + arrow.motionY + " " + arrow.motionZ);
 	}
 }
