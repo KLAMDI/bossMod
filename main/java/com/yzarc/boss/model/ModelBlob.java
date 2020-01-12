@@ -77,42 +77,42 @@ public class ModelBlob extends ModelBase
         this.coreLeft.addBox(16.0F, 18.0F, 3.0F, 5, 2, 10, scale);
         this.coreLeft.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
-        this.coreRight = new ModelRenderer(this, 0, 28);
+        this.coreRight = new ModelRenderer(this, 30, 28);
         this.coreRight.addBox(-5.0F, 18.0F, 3.0F, 5, 2, 10, scale);
         this.coreRight.setRotationPoint(-8.0F, (float)b0, -8.0F);
         
         for (int i = 0; i < backL.length; i++) {
-        	this.backL[i] = new ModelRenderer(this, 0, 26);
+        	this.backL[i] = new ModelRenderer(this, 0 + 20 - backLlengths[i], 26);
         	this.backL[i].addBox(12.0F, 19.0F, 16.0F + (float)i, backLlengths[i], 1, 1, scale);
         	this.backL[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
 		}
         
         for (int i = 0; i < backR.length; i++) {
-        	this.backR[i] = new ModelRenderer(this, 0, 26);
+        	this.backR[i] = new ModelRenderer(this, 0 + 20 - backRlengths[i], 26);
         	this.backR[i].addBox((float)(4 - backRlengths[i]), 19.0F, 16.0F + (float)i, backRlengths[i], 1, 1, scale);
         	this.backR[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
 		}
         
         for (int i = 0; i < coreL.length; i++) {
-        	this.coreL[i] = new ModelRenderer(this, 0, 26);
+        	this.coreL[i] = new ModelRenderer(this, 0 + 20 - coreLlengths[i], 26);
         	this.coreL[i].addBox(12.0F, 19.0F, 0.0F + (float)i, coreLlengths[i], 1, 1, scale);
         	this.coreL[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
         
         for (int i = 0; i < coreR.length; i++) {
-        	this.coreR[i] = new ModelRenderer(this, 0, 26);
+        	this.coreR[i] = new ModelRenderer(this, 0 + 20 - coreRlengths[i], 26);
         	this.coreR[i].addBox((float)(4 - coreRlengths[i]), 19.0F, 0.0F + (float)i, coreRlengths[i], 1, 1, scale);
         	this.coreR[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
        
         for (int i = 0; i < frontL.length; i++) {
-        	this.frontL[i] = new ModelRenderer(this, 0, 26);
+        	this.frontL[i] = new ModelRenderer(this, 0 + 20 - frontLlengths[i], 26);
         	this.frontL[i].addBox(12.0F, 19.0F, -4.0F + (float)i, frontLlengths[i], 1, 1, scale);
         	this.frontL[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
         
         for (int i = 0; i < frontR.length; i++) {
-        	this.frontR[i] = new ModelRenderer(this, 0, 26);
+        	this.frontR[i] = new ModelRenderer(this, 0 + 20 - frontRlengths[i], 26);
         	this.frontR[i].addBox((float)(4 - frontRlengths[i]), 19.0F, -4.0F + (float)i, frontRlengths[i], 1, 1, scale);
         	this.frontR[i].setRotationPoint(-8.0F, (float)b0, -8.0F);
         }
