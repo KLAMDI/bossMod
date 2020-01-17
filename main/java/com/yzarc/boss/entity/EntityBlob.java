@@ -1,5 +1,8 @@
 package com.yzarc.boss.entity;
 
+import com.yzarc.boss.entity.effect.EntitySlimeReflectFX;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -48,7 +51,7 @@ public class EntityBlob extends EntityMob
 	public void onLivingUpdate()
 	{
 		changeStance();
-		//super.onLivingUpdate();
+		super.onLivingUpdate();
 	}
 	
 	public boolean attackEntityFrom(DamageSource source, float f1)
@@ -124,9 +127,15 @@ public class EntityBlob extends EntityMob
 		arrow.motionZ = -entity.motionZ;
 		
 		if (!this.worldObj.isRemote)
-        {
+        {          
             this.worldObj.spawnEntityInWorld(arrow);
         }
+		
+		else 
+		{
+			//Spawn in a reflect particle
+			Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySlimeReflectFX(this.worldObj, entity.posX, entity.posY, entity.posZ));
+		}
 
 	}
 }
