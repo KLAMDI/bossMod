@@ -2,6 +2,7 @@ package com.yzarc.boss;
 
 import com.yzarc.boss.blocks.BossBlocks;
 import com.yzarc.boss.entity.BossEntities;
+import com.yzarc.boss.items.BossItems;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -11,6 +12,7 @@ public class CommonProxy
 {
 	public void preInit(FMLPreInitializationEvent e) 
 	{
+		BossItems.init();
 		BossBlocks.init();
 		BossEntities.init();
     }
