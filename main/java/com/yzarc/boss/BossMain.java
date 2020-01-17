@@ -1,9 +1,5 @@
 package com.yzarc.boss;
 
-import net.minecraft.init.Blocks;
-
-import com.yzarc.boss.blocks.BossBlocks;
-
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

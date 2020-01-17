@@ -1,3 +1,5 @@
 < en_US.lang - English localization file for the mod boss >
 tile.test.name=Test Block
 entity.blob.name=Blob
+itemGroup.tabBossMod=Boss Mod
+item.nohoe.name=This Ain't No Hoe
