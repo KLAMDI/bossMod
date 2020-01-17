@@ -1,6 +1,7 @@
 package com.yzarc.boss.entity;
 
 import net.minecraft.entity.Entity;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
@@ -11,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraft.util.MathHelper;
 
 public class EntityBlob extends EntityMob
 {
@@ -111,48 +113,20 @@ public class EntityBlob extends EntityMob
 		this.isBig = isBig;
 	}
 	
-	//spawns a copy of the arrow taht went into it's body --NEEDS ROTATION CHECK--
+	//spawns a copy of the arrow that went into its body and sends it back at the player
 	public void SpawnArrow(Entity entity)
 	{
-		double 	posX = entity.posX, //3 
-				posY = entity.posY, 
-				posZ = entity.posZ;
-		double dx, dy, dz;
-		//blob pos = ~0 ~0 ~0
-		dx = this.posX - posX; //this.posX = 5
-		dy = this.posY - posY;
-		dz = this.posZ - posZ;
-		
-		if (dx < 0)
-			dx -= 0.3;
-		else
-			dx += 0.3;
-		
-		if (dy < 0)
-			dy -= 0.3;
-		else
-			dy += 0.3;
-		
-		if (dz < 0)
-			dz -= 0.3;
-		else
-			dz += 0.3;
-		
-		double 	newPosX = this.posX + dx,
-				newPosY = this.posY + dy,
-				newPosZ = this.posZ + dz;
-		
-		EntityArrow arrow = new EntityArrow(this.worldObj, newPosX, newPosY, newPosZ);
+
+		EntityArrow arrow = new EntityArrow(this.worldObj, entity.posX, entity.posY, entity.posZ);
 		arrow.canBePickedUp = 1;
-		arrow.motionX = entity.motionX;
-		arrow.motionY = entity.motionY;
-		arrow.motionZ = entity.motionZ;
+		arrow.motionX = -entity.motionX;
+		arrow.motionY = -entity.motionY;
+		arrow.motionZ = -entity.motionZ;
 		
 		if (!this.worldObj.isRemote)
         {
             this.worldObj.spawnEntityInWorld(arrow);
         }
-		System.out.println(posX + " "+ posY + " " + posZ + "\t");
-		System.out.println(arrow.motionX + " " + arrow.motionY + " " + arrow.motionZ);
+
 	}
 }
