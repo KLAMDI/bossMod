@@ -1,5 +1,7 @@
 package com.yzarc.boss.entity;
 
+import com.yzarc.boss.items.BossItems;
+
 import net.minecraft.entity.Entity;
 
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -85,7 +87,7 @@ public class EntityBlob extends EntityMob
 
 	protected Item getDropItem()
 	{
-		return Items.diamond_hoe;
+		return BossItems.noHoe;
 	}
 	
 	public boolean getCanSpawnHere()
