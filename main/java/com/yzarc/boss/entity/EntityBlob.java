@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import scala.collection.concurrent.Debug;
 import net.minecraft.util.MathHelper;
 
 public class EntityBlob extends EntityMob
@@ -70,8 +71,7 @@ public class EntityBlob extends EntityMob
 			}
 			else //if donutStance
 			{
-				entity.setDead();
-				SpawnArrow(entity);
+				ReflectArrow(entity);
 				return false;
 			}
 		}
@@ -117,39 +117,16 @@ public class EntityBlob extends EntityMob
 		this.isBig = isBig;
 	}
 	
-	//spawns a copy of the arrow that went into its body and sends it back at the player
-	public void SpawnArrow(Entity entity)
+	//intensifies the Minecraft reflecting of the arrow
+	public void ReflectArrow(Entity entity)
 	{
 		
-		double dx = 0, dy = 0, dz = 0;
-		double speedX = MathHelper.sqrt_double(this.motionX*this.motionX);
-		double speedY = MathHelper.sqrt_double(this.motionY*this.motionY);
-		double speedZ = MathHelper.sqrt_double(this.motionZ*this.motionZ);
+		entity.motionX = entity.motionX*5.0F;
+		entity.motionY = entity.motionY*5.0F;
+		entity.motionZ = entity.motionZ*5.0F;
 		
-		if (speedX > 0) {
-			dx = 0.3*(this.motionX/speedX);
-		}
-		if (speedY > 0) {
-			dy = 0.3*(this.motionY/speedY);
-		}
-		if (speedX > 0) {
-			dz = 0.3*(this.motionZ/speedZ);
-		}
-
-		EntityArrow arrow = new EntityArrow(this.worldObj, entity.posX + dx, entity.posY + dy, entity.posZ + dz);
-		arrow.canBePickedUp = 1;
-		arrow.motionX = -entity.motionX;
-		arrow.motionY = -entity.motionY;
-		arrow.motionZ = -entity.motionZ;
-		
-		
-		if (!this.worldObj.isRemote)
+		if (this.worldObj.isRemote)
         {          
-            this.worldObj.spawnEntityInWorld(arrow);
-        }
-		
-		else 
-		{
 			//Spawn in a reflect particle
 			Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySlimeReflectFX(this.worldObj, entity.posX, entity.posY, entity.posZ));
 		}
