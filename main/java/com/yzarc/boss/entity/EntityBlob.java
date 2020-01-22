@@ -125,6 +125,11 @@ public class EntityBlob extends EntityMob
 		entity.motionY = entity.motionY*5.0F;
 		entity.motionZ = entity.motionZ*5.0F;
 		
+		//Prevents the arrow from spazzing out if its Y speed is too low, and makes them bounce on the blob instead
+		if (entity.motionY < 0.1D) {
+			entity.motionY = -4;
+		}
+		
 		if (this.worldObj.isRemote)
         {          
 			//Spawn in a reflect particle
