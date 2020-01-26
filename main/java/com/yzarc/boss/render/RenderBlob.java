@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelCreeper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -23,15 +24,19 @@ import com.yzarc.boss.model.ModelBlob;;
 public class RenderBlob extends RenderLiving {
 
     private static final ResourceLocation blobTextures = new ResourceLocation(BossMain.MODID + ":textures/entity/blob_base.png");
-    private static final ResourceLocation armoredCreeperTextures = new ResourceLocation(BossMain.MODID + ":textures/entity/blob_armor.png");
+    private static final ResourceLocation armoredBlobTextures = new ResourceLocation(BossMain.MODID + ":textures/entity/blob_armor.png");
     
     protected ModelBlob entityModel;
+    private ModelBase blobModel;
 
     public RenderBlob(ModelBase modelBlob, float scale)
     {
         super(modelBlob, scale);
-        
+               
         entityModel = ((ModelBlob) mainModel);
+        
+        //Needed for armored blob textures
+        this.blobModel = new ModelBlob(2.0F*scale);
     }
     
     public void renderBlob(EntityBlob entity, double x, double y, double z, float u, float v)
@@ -80,13 +85,13 @@ public class RenderBlob extends RenderLiving {
             }
             if (i == 1) {
 		        float f1 = (float)entityBlob.ticksExisted + f;
-		        this.bindTexture(armoredCreeperTextures);
+		        this.bindTexture(armoredBlobTextures);
 		        GL11.glMatrixMode(GL11.GL_TEXTURE);
 		        GL11.glLoadIdentity();
 		        float f2 = f1 * 0.01F;
 		        float f3 = f1 * 0.01F;
 		        GL11.glTranslatef(f2, f3, 0.0F);
-		        this.setRenderPassModel(this.entityModel);
+		        this.setRenderPassModel(this.blobModel);
 		        GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		        GL11.glEnable(GL11.GL_BLEND);
 		        float f4 = 0.5F;
