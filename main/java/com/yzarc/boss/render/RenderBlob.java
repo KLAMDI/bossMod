@@ -9,7 +9,10 @@ import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
 import com.yzarc.boss.BossMain;
@@ -20,6 +23,7 @@ import com.yzarc.boss.model.ModelBlob;;
 public class RenderBlob extends RenderLiving {
 
     private static final ResourceLocation blobTextures = new ResourceLocation(BossMain.MODID + ":textures/entity/blob_base.png");
+    private static final ResourceLocation armoredCreeperTextures = new ResourceLocation(BossMain.MODID + ":textures/entity/blob_armor.png");
     
     protected ModelBlob entityModel;
 
@@ -62,5 +66,62 @@ public class RenderBlob extends RenderLiving {
     {
         return this.getEntityTexture((EntityBlob)entity);
     }
+    
+    protected int shouldRenderPass(EntityBlob entityBlob, int i, float f) {
+    	if (entityBlob.isBig()) {
+    		
+            if (entityBlob.isInvisible())
+            {
+                GL11.glDepthMask(false);
+            }
+            else
+            {
+                GL11.glDepthMask(true);
+            }
+            if (i == 1) {
+		        float f1 = (float)entityBlob.ticksExisted + f;
+		        this.bindTexture(armoredCreeperTextures);
+		        GL11.glMatrixMode(GL11.GL_TEXTURE);
+		        GL11.glLoadIdentity();
+		        float f2 = f1 * 0.01F;
+		        float f3 = f1 * 0.01F;
+		        GL11.glTranslatef(f2, f3, 0.0F);
+		        this.setRenderPassModel(this.entityModel);
+		        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+		        GL11.glEnable(GL11.GL_BLEND);
+		        float f4 = 0.5F;
+		        GL11.glColor4f(f4, f4, f4, 1.0F);
+		        GL11.glDisable(GL11.GL_LIGHTING);
+		        GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);
+		        return 1;
+            }
+            
+            if (i == 2) {
+                GL11.glMatrixMode(GL11.GL_TEXTURE);
+                GL11.glLoadIdentity();
+                GL11.glMatrixMode(GL11.GL_MODELVIEW);
+                GL11.glEnable(GL11.GL_LIGHTING);
+                GL11.glDisable(GL11.GL_BLEND);
+            }
+    	}
+    	return -1;
+    }
+    
+    protected int inheritRenderPass(EntityBlob entity, int i, float f)
+    {
+        return -1;
+    }
+    
+    protected int shouldRenderPass(EntityLivingBase entity, int i, float f)
+    {
+        return this.shouldRenderPass((EntityBlob)entity, i, f);
+    }
+    
+    protected int inheritRenderPass(EntityLivingBase entity, int i, float f)
+    {
+        return this.inheritRenderPass((EntityBlob)entity, i, f);
+    }
 }
+
+
 
