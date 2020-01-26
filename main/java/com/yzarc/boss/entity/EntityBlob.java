@@ -112,6 +112,10 @@ public class EntityBlob extends EntityMob
 	public boolean isBig() {
 		return isBig;
 	}
+	
+	public boolean isDonut() {
+		return donutStance;
+	}
 
 	public void setBig(boolean isBig) {
 		this.isBig = isBig;
