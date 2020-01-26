@@ -68,7 +68,7 @@ public class RenderBlob extends RenderLiving {
     }
     
     protected int shouldRenderPass(EntityBlob entityBlob, int i, float f) {
-    	if (entityBlob.isBig()) {
+    	if (entityBlob.isReflect()) {
     		
             if (entityBlob.isInvisible())
             {
