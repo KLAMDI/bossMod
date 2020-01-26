@@ -23,7 +23,7 @@ import com.yzarc.boss.model.ModelBlob;;
 public class RenderBlob extends RenderLiving {
 
     private static final ResourceLocation blobTextures = new ResourceLocation(BossMain.MODID + ":textures/entity/blob_base.png");
-    private static final ResourceLocation armoredCreeperTextures = new ResourceLocation(BossMain.MODID + ":textures/entity/blob_armor.png");
+    private static final ResourceLocation armoredBlobTextures = new ResourceLocation(BossMain.MODID + ":textures/entity/blob_armor.png");
     
     protected ModelBlob entityModel;
 
@@ -80,7 +80,7 @@ public class RenderBlob extends RenderLiving {
             }
             if (i == 1) {
 		        float f1 = (float)entityBlob.ticksExisted + f;
-		        this.bindTexture(armoredCreeperTextures);
+		        this.bindTexture(armoredBlobTextures);
 		        GL11.glMatrixMode(GL11.GL_TEXTURE);
 		        GL11.glLoadIdentity();
 		        float f2 = f1 * 0.01F;
