@@ -25,21 +25,22 @@ public class EntityBlob extends EntityMob
 	private float height = 0.3F;
 	private double aggroDistance = 4.0D;
 	private int arrowCount;
+	private int attackDelayCounter;
 	
 	private boolean isBig;
 	private boolean reflectStance;
+	private boolean attacking;
 	
 	public EntityBlob(World worldIn) 
 	{
 		super(worldIn);
 		this.setSize(width,height);
 		this.arrowCount = 0;
+		this.attackDelayCounter = 0;
 		this.isBig = false;
 		this.reflectStance = false;
 		//this.tasks.addTask(0, new EntityAIWander(this, 0.1D));
 		this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-		
-		// TODO Auto-generated constructor stub
 	}
 	
 	protected void applyEntityAttributes()
@@ -61,12 +62,12 @@ public class EntityBlob extends EntityMob
 		Entity entity = source.getSourceOfDamage();
 		if (entity instanceof EntityArrow)
 		{
-			if (!reflectStance)
+			if (!this.isReflect())
 			{
 				this.arrowCount++;
-				if (arrowCount >= 3)
+				if (this.arrowCount >= 3)
 				{
-					reflectStance = true;
+					this.setReflect(true);
 				}
 			}
 			else //if reflectStance
@@ -83,8 +84,9 @@ public class EntityBlob extends EntityMob
 	}
 	
 	@Override
-	protected void attackEntity(Entity targetEntity, float amount) {
-		super.attackEntity(targetEntity, amount);
+	public boolean attackEntityAsMob(Entity targetEntity) 
+	{
+		return super.attackEntityAsMob(targetEntity);
 	}
 
 	@Override
@@ -106,25 +108,13 @@ public class EntityBlob extends EntityMob
     {
     	if (this.worldObj.getClosestPlayerToEntity(this, aggroDistance) != null)
     	{
-    		isBig = true;
+    		this.setBig(true);
     	}
     	else
     	{
-    		isBig = false;
+    		this.setBig(false);
     	}
     }
-
-	public boolean isBig() {
-		return isBig;
-	}
-	
-	public boolean isReflect() {
-		return reflectStance;
-	}
-
-	public void setBig(boolean isBig) {
-		this.isBig = isBig;
-	}
 	
 	//intensifies the Minecraft reflecting of the arrow
 	public void ReflectArrow(Entity entity)
@@ -144,6 +134,35 @@ public class EntityBlob extends EntityMob
 			//Spawn in a reflect particle
 			Minecraft.getMinecraft().effectRenderer.addEffect(new EntitySlimeReflectFX(this.worldObj, entity.posX, entity.posY, entity.posZ));
 		}
+		
+		this.worldObj.playSoundEffect(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D, "boss:blob-boing", 1.0F, this.rand.nextFloat() * 0.4F + 0.8F);
+	}
+	
+	public boolean isBig() {
+		return this.isBig;
+	}
 
+	public void setBig(boolean isBig) {
+		this.isBig = isBig;
+	}
+	
+	public void setAttacking(boolean b) 
+	{
+		this.attacking = b;
+	}
+	
+	public boolean isAttacking()
+	{
+		return this.attacking;
+	}
+	
+	public void setReflect(boolean b)
+	{
+		this.reflectStance = b;
+	}
+	
+	public boolean isReflect() 
+	{
+		return this.reflectStance;
 	}
 }
