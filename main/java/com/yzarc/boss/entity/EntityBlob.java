@@ -5,10 +5,11 @@ import com.yzarc.boss.entity.effect.EntitySlimeReflectFX;
 import net.minecraft.client.Minecraft;
 import com.yzarc.boss.items.BossItems;
 import net.minecraft.entity.Entity;
-
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -19,7 +20,7 @@ import net.minecraft.world.World;
 import scala.collection.concurrent.Debug;
 import net.minecraft.util.MathHelper;
 
-public class EntityBlob extends EntityMob
+public class EntityBlob extends EntityCreature
 {
 	private float width = 2.0F;
 	private float height = 0.3F;
@@ -39,15 +40,12 @@ public class EntityBlob extends EntityMob
 		this.attackDelayCounter = 0;
 		this.isBig = false;
 		this.reflectStance = false;
-		//this.tasks.addTask(0, new EntityAIWander(this, 0.1D));
-		this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 	}
 	
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 	}
 	
@@ -57,7 +55,7 @@ public class EntityBlob extends EntityMob
 		super.onLivingUpdate();
 	}
 	
-	public boolean attackEntityFrom(DamageSource source, float f1)
+	public boolean attackEntityFrom(DamageSource source, float damageAmount)
 	{
 		Entity entity = source.getSourceOfDamage();
 		if (entity instanceof EntityArrow)
@@ -76,11 +74,8 @@ public class EntityBlob extends EntityMob
 				return false;
 			}
 		}
-		else
-		{
-			
-		}
-		return super.attackEntityFrom(source, f1);
+		
+		return super.attackEntityFrom(source, damageAmount);
 	}
 	
 	@Override
@@ -91,6 +86,7 @@ public class EntityBlob extends EntityMob
 
 	@Override
 	protected void updateEntityActionState() {
+		this.entityToAttack = null;
 		super.updateEntityActionState();
 	}
 

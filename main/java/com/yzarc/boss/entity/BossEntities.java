@@ -24,7 +24,7 @@ public class BossEntities
 		int randomId = EntityRegistry.findGlobalUniqueEntityId();
 		EntityRegistry.registerGlobalEntityID(entityClass, entityName, randomId);
 		EntityRegistry.registerModEntity(entityClass, entityName, randomId, BossMain.modInstance, 64, 1, true);
-		EntityRegistry.addSpawn(entityClass, 2, 0, 1, EnumCreatureType.creature, BiomeGenBase.plains);
+		EntityRegistry.addSpawn(entityClass, 2, 0, 1, EnumCreatureType.monster, BiomeGenBase.plains);
 		
 		createEgg(randomId, solidColor, spotColor);
 	}
