@@ -27,7 +27,7 @@ public class EntityBlob extends EntityMob
 	private int arrowCount;
 	
 	private boolean isBig;
-	private boolean donutStance;
+	private boolean reflectStance;
 	
 	public EntityBlob(World worldIn) 
 	{
@@ -35,7 +35,7 @@ public class EntityBlob extends EntityMob
 		this.setSize(width,height);
 		this.arrowCount = 0;
 		this.isBig = false;
-		this.donutStance = false;
+		this.reflectStance = false;
 		//this.tasks.addTask(0, new EntityAIWander(this, 0.1D));
 		this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		
@@ -61,15 +61,15 @@ public class EntityBlob extends EntityMob
 		Entity entity = source.getSourceOfDamage();
 		if (entity instanceof EntityArrow)
 		{
-			if (!donutStance)
+			if (!reflectStance)
 			{
 				this.arrowCount++;
 				if (arrowCount >= 3)
 				{
-					donutStance = true;
+					reflectStance = true;
 				}
 			}
-			else //if donutStance
+			else //if reflectStance
 			{
 				ReflectArrow(entity);
 				return false;
@@ -113,8 +113,8 @@ public class EntityBlob extends EntityMob
 		return isBig;
 	}
 	
-	public boolean isDonut() {
-		return donutStance;
+	public boolean isReflect() {
+		return reflectStance;
 	}
 
 	public void setBig(boolean isBig) {
