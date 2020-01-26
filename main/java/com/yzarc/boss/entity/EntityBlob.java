@@ -81,6 +81,11 @@ public class EntityBlob extends EntityMob
 		}
 		return super.attackEntityFrom(source, f1);
 	}
+	
+	@Override
+	protected void attackEntity(Entity targetEntity, float amount) {
+		super.attackEntity(targetEntity, amount);
+	}
 
 	@Override
 	protected void updateEntityActionState() {
