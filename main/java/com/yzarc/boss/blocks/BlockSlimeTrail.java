@@ -2,6 +2,8 @@ package com.yzarc.boss.blocks;
 
 import java.util.Random;
 
+import com.yzarc.boss.BossMain;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -21,20 +23,24 @@ public class BlockSlimeTrail extends Block {
 
 	 private static final String __OBFID = "CL_00000309";
 
-	    protected BlockSlimeTrail()
+	    protected BlockSlimeTrail(String unlocalizedName, CreativeTabs creativeTab)
 	    {
 	        super(Material.snow);
-	        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.125F, 1.0F);
+	        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 	        this.setTickRandomly(true);
-	        this.setCreativeTab(CreativeTabs.tabDecorations);
+	        this.setCreativeTab(creativeTab);
 	        this.func_150154_b(0);
-	        this.setBlockName("slime_trail");
+	        
+	        String textureName = BossMain.MODID + ":" + unlocalizedName;
+	        
+	        this.setBlockTextureName(textureName);
+	        this.setBlockName(unlocalizedName);
 	    }
 
 	    @SideOnly(Side.CLIENT)
 	    public void registerBlockIcons(IIconRegister p_149651_1_)
 	    {
-	        this.blockIcon = p_149651_1_.registerIcon("stone");
+	        this.blockIcon = p_149651_1_.registerIcon(textureName);
 	    }
 
 	    /**
@@ -44,8 +50,8 @@ public class BlockSlimeTrail extends Block {
 	    public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_)
 	    {
 	        int l = p_149668_1_.getBlockMetadata(p_149668_2_, p_149668_3_, p_149668_4_) & 7;
-	        float f = 0.125F;
-	        return AxisAlignedBB.getBoundingBox((double)p_149668_2_ + this.minX, (double)p_149668_3_ + this.minY, (double)p_149668_4_ + this.minZ, (double)p_149668_2_ + this.maxX, (double)((float)p_149668_3_ + (float)l * f), (double)p_149668_4_ + this.maxZ);
+	        float f = 0.0625F;
+	        return AxisAlignedBB.getBoundingBox((double)p_149668_2_ + this.minX, (double)p_149668_3_ + this.minY, (double)p_149668_4_ + this.minZ, (double)p_149668_2_ + this.maxX, (double)((float)p_149668_3_ + (float)0 * f), (double)p_149668_4_ + this.maxZ);
 	    }
 
 	    /**
@@ -84,18 +90,18 @@ public class BlockSlimeTrail extends Block {
 	    protected void func_150154_b(int p_150154_1_)
 	    {
 	        int j = p_150154_1_ & 7;
-	        float f = (float)(2 * (1 + j)) / 16.0F;
+	        float f = (float)(1 * (1 + j)) / 16.0F;
 	        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f, 1.0F);
 	    }
 
 	    /**
 	     * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
 	     */
-//	    public boolean canPlaceBlockAt(World p_149742_1_, int p_149742_2_, int p_149742_3_, int p_149742_4_)
-//	    {
-//	        Block block = p_149742_1_.getBlock(p_149742_2_, p_149742_3_ - 1, p_149742_4_);
-//	        return block != Blocks.ice && block != Blocks.packed_ice ? (block.isLeaves(p_149742_1_, p_149742_2_, p_149742_3_ - 1, p_149742_4_) ? true : (block == this && (p_149742_1_.getBlockMetadata(p_149742_2_, p_149742_3_ - 1, p_149742_4_) & 7) == 7 ? true : block.isOpaqueCube() && block.blockMaterial.blocksMovement())) : false;
-//	    }
+	    public boolean canPlaceBlockAt(World p_149742_1_, int p_149742_2_, int p_149742_3_, int p_149742_4_)
+	    {
+	        Block block = p_149742_1_.getBlock(p_149742_2_, p_149742_3_ - 1, p_149742_4_);
+	        return block != Blocks.ice && block != Blocks.packed_ice ? (block.isLeaves(p_149742_1_, p_149742_2_, p_149742_3_ - 1, p_149742_4_) ? true : (block == this && (p_149742_1_.getBlockMetadata(p_149742_2_, p_149742_3_ - 1, p_149742_4_) & 7) == 7 ? true : block.isOpaqueCube())) : false;
+	    }
 
 	    /**
 	     * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
