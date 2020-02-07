@@ -11,11 +11,11 @@ import net.minecraft.creativetab.CreativeTabs;
 public class BossBlocks 
 {
     public static Block test;
-    public static Block BlockSlimeTrail;
+    public static Block slime_trail;
     public static final void init() 
     {
     	GameRegistry.registerBlock(test = new CreateBlocks("test", Material.cake, ClientProxy.bossModTab, 2.0F, 6.0F, 1.0F, "pickaxe", 3, Block.soundTypeGravel), "test_block");
-    	GameRegistry.registerBlock(BlockSlimeTrail = new BlockSlimeTrail(), "slime_trail");
+    	GameRegistry.registerBlock(slime_trail = new BlockSlimeTrail("slime_trail", ClientProxy.bossModTab), "slime_trail_block");
     }
     
 }
