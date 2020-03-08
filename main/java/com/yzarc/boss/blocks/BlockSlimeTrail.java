@@ -53,7 +53,7 @@ public class BlockSlimeTrail extends Block {
      {
          int l = world.getBlockMetadata(x, y, z) & 7;
          float f = 0.0625F;
-         return AxisAlignedBB.getBoundingBox((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)((float)y + (float)0 * f), (double)z + this.maxZ);
+         return AxisAlignedBB.getBoundingBox((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)((float)y + (float)l * f), (double)z + this.maxZ);
      }
 
      /**
@@ -102,7 +102,7 @@ public class BlockSlimeTrail extends Block {
      public boolean canPlaceBlockAt(World world, int x, int y, int z)
      {
     	 Block block = world.getBlock(x, y - 1, z);
-    	 return block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7 ? true : block.isOpaqueCube() && block.isSideSolid(world, x, y, z, ForgeDirection.UP);
+    	 return block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7 ? true : block.isOpaqueCube() ;
      }
      
 //     if(block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
