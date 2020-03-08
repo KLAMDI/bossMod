@@ -6,7 +6,7 @@ import net.minecraft.block.material.MaterialLogic;
 
 public class BossMaterials extends Material {
 	
-	public static final Material slime = (new Material(MapColor.foliageColor));
+	public static final Material slime = (new MaterialLogic(MapColor.foliageColor)).setReplaceable();
    
 	/** The color index used to draw the blocks of this material on maps. */
     private final MapColor materialMapColor;
