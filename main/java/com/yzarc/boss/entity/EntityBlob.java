@@ -1,6 +1,7 @@
 package com.yzarc.boss.entity;
 
 import com.yzarc.boss.blocks.BossBlocks;
+import com.yzarc.boss.entity.ai.EntityAIBigAttack;
 import com.yzarc.boss.entity.effect.EntitySlimeReflectFX;
 
 import net.minecraft.block.material.Material;
@@ -9,6 +10,9 @@ import com.yzarc.boss.items.BossItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAIMoveTowardsTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.IAnimals;
@@ -23,7 +27,7 @@ import net.minecraft.world.World;
 import scala.collection.concurrent.Debug;
 import net.minecraft.util.MathHelper;
 
-public class EntityBlob extends EntityCreature
+public class EntityBlob extends EntityMob
 {
 	private float width = 2.0F;
 	private float height = 0.3F;
@@ -38,6 +42,10 @@ public class EntityBlob extends EntityCreature
 	public EntityBlob(World worldIn) 
 	{
 		super(worldIn);
+		this.tasks.addTask(0, new EntityAIBigAttack(this, EntityPlayer.class, 0.0D, false));
+		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.5D, 16.0F));
+	    this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+		
 		this.setSize(width,height);
 		this.arrowCount = 0;
 		this.attackDelayCounter = 0;
@@ -51,6 +59,12 @@ public class EntityBlob extends EntityCreature
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 	}
+	
+	@Override
+    protected boolean isAIEnabled()
+    {
+        return true;
+    }
 	
 	public void onLivingUpdate()
 	{
@@ -97,17 +111,12 @@ public class EntityBlob extends EntityCreature
 		return super.attackEntityFrom(source, damageAmount);
 	}
 	
-	@Override
-	public boolean attackEntityAsMob(Entity targetEntity) 
-	{
-		return super.attackEntityAsMob(targetEntity);
-	}
-
-	@Override
-	protected void updateEntityActionState() {
-		this.entityToAttack = null;
-		super.updateEntityActionState();
-	}
+//	@Override
+//	public boolean attackEntityAsMob(Entity targetEntity) 
+//	{
+//		System.out.println(targetEntity);
+//		return super.attackEntityAsMob(targetEntity);
+//	}
 
 	protected Item getDropItem()
 	{
