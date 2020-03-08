@@ -51,7 +51,7 @@ public class BlockSlimeTrail extends Block {
       */
      public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
      {
-         int l = world.getBlockMetadata(x, y, z) & 7;
+         int l = world.getBlockMetadata(x, y, z) & 15;
          float f = 0.0625F;
          return AxisAlignedBB.getBoundingBox((double)x + this.minX, (double)y + this.minY, (double)z + this.minZ, (double)x + this.maxX, (double)((float)y + (float)l * f), (double)z + this.maxZ);
      }
@@ -91,7 +91,7 @@ public class BlockSlimeTrail extends Block {
 
      protected void setBlockBoundsByMetaData(int meta)
      {
-    	 int layerAmount = meta & 7;
+    	 int layerAmount = meta & 15;
     	 float y = (float)(1 * (1 + layerAmount)) / 16.0F;
     	 this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, y, 1.0F);
      }
@@ -102,7 +102,7 @@ public class BlockSlimeTrail extends Block {
      public boolean canPlaceBlockAt(World world, int x, int y, int z)
      {
     	 Block block = world.getBlock(x, y - 1, z);
-    	 return block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7 ? true : block.isOpaqueCube() ;
+    	 return block == this && (world.getBlockMetadata(x, y - 1, z) & 15) == 15 ? true : block.isOpaqueCube() ;
      }
      
 //     if(block == this && (world.getBlockMetadata(x, y - 1, z) & 7) == 7)
@@ -199,7 +199,7 @@ public class BlockSlimeTrail extends Block {
       */
      public int quantityDropped(int meta, int fortune, Random random)
      {
-    	 return (meta & 7) + 1;
+    	 return (meta & 15) + 1;
      }
 
      /**
@@ -215,6 +215,6 @@ public class BlockSlimeTrail extends Block {
      public boolean isReplaceable(IBlockAccess world, int x, int y, int z)
      {
     	 int meta = world.getBlockMetadata(x, y, z);
-    	 return meta >= 7 ? false : blockMaterial.isReplaceable();
+    	 return meta >= 15 ? false : blockMaterial.isReplaceable();
      }
 }

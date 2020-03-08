@@ -41,9 +41,9 @@ public class ItemSlimeTrail extends ItemBlockWithMetadata
             if (block == BossBlocks.slime_trail)
             {
                 int i1 = world.getBlockMetadata(x, y, z);
-                int j1 = i1 & 7;
+                int j1 = i1 & 15;
 
-                if (j1 <= 6 && world.checkNoEntityCollision(this.field_150939_a.getCollisionBoundingBoxFromPool(world, x, y, z)) && world.setBlockMetadataWithNotify(x, y, z, j1 + 1 | i1 & -8, 2))
+                if (j1 <= 14 && world.checkNoEntityCollision(this.field_150939_a.getCollisionBoundingBoxFromPool(world, x, y, z)) && world.setBlockMetadataWithNotify(x, y, z, j1 + 1 | i1 & -8, 2))
                 {
                     world.playSoundEffect((double)((float)x + 0.5F), (double)((float)y + 0.5F), (double)((float)z + 0.5F), this.field_150939_a.stepSound.func_150496_b(), (this.field_150939_a.stepSound.getVolume() + 1.0F) / 2.0F, this.field_150939_a.stepSound.getPitch() * 0.8F);
                     --item.stackSize;
