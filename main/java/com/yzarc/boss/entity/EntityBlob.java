@@ -1,7 +1,9 @@
 package com.yzarc.boss.entity;
 
+import com.yzarc.boss.blocks.BossBlocks;
 import com.yzarc.boss.entity.effect.EntitySlimeReflectFX;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import com.yzarc.boss.items.BossItems;
 import net.minecraft.entity.Entity;
@@ -12,6 +14,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
@@ -53,6 +56,22 @@ public class EntityBlob extends EntityCreature
 	{
 		changeStance();
 		super.onLivingUpdate();
+		
+		int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.posY);
+        int k = MathHelper.floor_double(this.posZ);
+        
+		for (int l = 0; l < 4; ++l)
+        {
+            i = MathHelper.floor_double(this.posX + (double)((float)(l % 2 * 2 - 1) * 0.25F));
+            j = MathHelper.floor_double(this.posY);
+            k = MathHelper.floor_double(this.posZ + (double)((float)(l / 2 % 2 * 2 - 1) * 0.25F));
+
+            if (this.worldObj.getBlock(i, j, k).getMaterial() == Material.air && BossBlocks.slime_trail.canPlaceBlockAt(this.worldObj, i, j, k))
+            {
+                this.worldObj.setBlock(i, j, k, BossBlocks.slime_trail);
+            }
+        }
 	}
 	
 	public boolean attackEntityFrom(DamageSource source, float damageAmount)
