@@ -27,7 +27,7 @@ public class BlockSlimeTrail extends Block {
 
 	 protected BlockSlimeTrail(String unlocalizedName, CreativeTabs creativeTab)
      {
-         super(Material.snow);
+         super(BossMaterials.slime);
          this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
          this.setTickRandomly(true);
          this.setCreativeTab(creativeTab);
