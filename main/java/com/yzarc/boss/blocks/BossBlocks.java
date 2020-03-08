@@ -7,8 +7,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 
-public class BossBlocks 
+public class BossBlocks extends Blocks
 {
     public static Block test;
     public static Block slime_trail;
